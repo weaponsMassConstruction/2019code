@@ -2,9 +2,9 @@ package frc.robot;
 
 
 public class DriveTrain {
-    WoMB ob;
+    WoMC ob;
     
-   public DriveTrain(WoMB o){
+   public DriveTrain(WoMC o){
        ob = o;
    }
 

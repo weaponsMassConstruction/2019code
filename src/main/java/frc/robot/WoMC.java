@@ -4,12 +4,13 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.PWM;
-public class WoMB{
+public class WoMC{
     PWM leftBack, leftFront, rightBack, rightFront;
     TalonSRX arm;
     GameController controller;
     DriverStation driverStation;
-    public WoMD(){
+    
+    public WoMC(){
         //Drivetrain
         leftBack = new PWM(1);
         leftFront = new PWM(2);

@@ -1,13 +1,15 @@
 package frc.robot;
 
 public class DriverControls {
-	private WoMB ob;
+	private WoMC ob;
 	private DriveTrain drive;
+	private Arm arm;
 	private double speedStraight = 0, speedLeft = 0, speedRight = 0;
 
-	public DriverControls(WoMB ob, DriveTrain drive) {
-		this.ob = ob;
-		this.drive = drive;
+	public DriverControls(WoMC o, DriveTrain d, Arm a) {
+		ob = o;
+		drive = d;
+		arm = a;
 	}
 
 	public void driverControlsPS4() {
@@ -24,6 +26,5 @@ public class DriverControls {
 			speedRight = ob.controller.getRightTriggerAxis() * 0.65;
 		}
 		drive.drive(speedStraight, speedRight, speedLeft);
-
 	}
 }
