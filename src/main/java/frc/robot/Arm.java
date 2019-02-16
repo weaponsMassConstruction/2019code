@@ -1,15 +1,21 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
 public class Arm {
-    WoMC ob;
+    private static TalonSRX arm;
 
-    public Arm(WoMC o) {
-        ob = o;
+    public Arm() {
+        // Arm
+        arm = new TalonSRX(1);
+        arm.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute);
+        arm.config_kP(0, .08, 0);
+        arm.enableVoltageCompensation(true);
     }
 
-    public void setPosition(double position) {
-        ob.arm.set(ControlMode.Position, position);
+    public static void setPosition(double position) {
+        arm.set(ControlMode.Position, position);
     }
 }
