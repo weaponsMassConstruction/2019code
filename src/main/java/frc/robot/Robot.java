@@ -7,10 +7,13 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.subsystems.*;
+import frc.robot.controls.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -21,9 +24,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends TimedRobot {
   DriveTrain drive;
+
   Arm arm;
+  Climber climber;
+  Crab crab;
+  Intake intake;
+
   DriverControls driverJoy;
-  DriverStation driverStation;
+  OperatorControls operatorJoy;
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -31,9 +39,21 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+
+    // Drivetrain
     drive = new DriveTrain();
+
+    // Subsystems
+    Compressor c = new Compressor();
+    c.setClosedLoopControl(true);
     arm = new Arm();
+    climber = new Climber();
+    crab = new Crab();
+    intake = new Intake();
+
+    // Controls
     driverJoy = new DriverControls();
+    operatorJoy = new OperatorControls();
   }
 
   /**
@@ -78,6 +98,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     DriverControls.driverControls();
+    OperatorControls.operatorControls();
   }
 
   /**
