@@ -8,12 +8,10 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.subsystems.*;
 import frc.robot.controls.*;
+import frc.robot.subsystems.*;
+import edu.wpi.first.cameraserver.CameraServer;;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -23,17 +21,6 @@ import frc.robot.controls.*;
  * project.
  */
 public class Robot extends TimedRobot {
-  DriveTrain drive;
-
-  Arm arm;
-  Climber climber;
-  Crab crab;
-  HatchIntake hatchIntake;
-
-  DriverControls driverJoy;
-  OperatorControls operatorJoy;
-  PTester ptester;
-
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -41,24 +28,18 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-
-    // Drivetrain
-    drive = new DriveTrain();
-
-    // Subsystems
     Compressor c = new Compressor(15);
     c.setClosedLoopControl(true);
-    
-    //arm = new Arm();
-    //climber = new Climber();
-    //crab = new Crab();
-    hatchIntake = new HatchIntake();
-    
-    // Controls
-    driverJoy = new DriverControls();
-    operatorJoy = new OperatorControls();
-    ptester = new PTester();
-    
+		try{
+			CameraServer.getInstance().startAutomaticCapture("Main", 1);
+		}catch(Exception e){
+      System.out.println(e);
+		}
+    try{
+			CameraServer.getInstance().startAutomaticCapture("Side", 0);
+		}catch(Exception e){
+      System.out.println(e);
+		}
   }
 
   /**
@@ -103,7 +84,8 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     DriverControls.driverControls();
-    //OperatorControls.operatorControls();
+    OperatorControls.operatorControls();
+    //Arm.print();
   }
 
   /**

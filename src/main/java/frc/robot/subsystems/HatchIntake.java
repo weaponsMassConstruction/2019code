@@ -29,7 +29,7 @@ public class HatchIntake {
         servo.set(0);
     }
 
-    public static boolean getOut() {
+    public static boolean isExtended() {
         if (intake.get() == Value.kForward) {
             return true;
         }

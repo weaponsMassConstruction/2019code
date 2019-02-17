@@ -2,22 +2,29 @@ package frc.robot.controls;
 
 import frc.robot.subsystems.*;
 import frc.robot.*;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 
 public class OperatorControls {
-    private static XboxController operatorJoy;
+    private static Xbox operatorJoy;
+    private static boolean override = false;
 
-    public OperatorControls() {
-        operatorJoy = new XboxController(1);
+    static {
+        operatorJoy = new Xbox(1);
     }
 
     public static void operatorControls() {
-        if (!HatchIntake.getOut()) {
-            if (Math.abs(operatorJoy.getY(Hand.kRight)) > .05) {
-                Arm.manualMove(operatorJoy.getY(Hand.kRight));
+        // Manual arm movement
+        if (!HatchIntake.isExtended()) {
+            if (Math.abs(operatorJoy.getY(Hand.kRight)) > .2) {
+                Arm.manualMove(-operatorJoy.getY(Hand.kRight));
+                override = true;
             } else {
-                if (operatorJoy.getAButton()) {
+                if (override) {
+                    Arm.setPosition(Arm.getPosition());
+                    override = false;
+                }
+                // PID Arm movement
+                else if (operatorJoy.getAButton()) {
                     Arm.setPosition(Constants.BALL_TWO);
                 } else if (operatorJoy.getBButton()) {
                     Arm.setPosition(Constants.HATCH_TWO);
@@ -36,8 +43,15 @@ public class OperatorControls {
                 }
             }
         }
-        if (Math.abs(operatorJoy.getY(Hand.kLeft)) > .05) {
-
-        }
+		// Grabber controls
+		if (operatorJoy.getButtonDRight()) {
+			Grabber.outExtend();
+		} else if (operatorJoy.getButtonDLeft() && !Grabber.isInExtended()) {
+			Grabber.outRetract();
+		} else if (operatorJoy.getButtonDUp() && Grabber.isOutExtended()) {
+			Grabber.inExtend();
+		} else if (operatorJoy.getButtonDDown()) {
+			Grabber.inRetract();
+		}
     }
 }

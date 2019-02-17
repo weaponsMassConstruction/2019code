@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.PWM;
 public class DriveTrain {
     private static PWM leftBack, leftFront, rightBack, rightFront;
 
-    public DriveTrain() {
+    static  {
         // Drivetrain
         leftBack = new PWM(3);
         leftFront = new PWM(1);
@@ -21,9 +21,9 @@ public class DriveTrain {
      * @param leftTurn: left axis value
      */
     public static void drive(double speed, double turn) {
-        rightBack.setSpeed(speed - turn);
-        rightFront.setSpeed(speed - turn);
-        leftBack.setSpeed(speed + turn);
-        leftFront.setSpeed(speed + turn);
+        rightBack.setSpeed(speed + turn);
+        rightFront.setSpeed(speed + turn);
+        leftBack.setSpeed(speed - turn);
+        leftFront.setSpeed(speed - turn);
     }
 }

@@ -1,24 +1,13 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PWM;
 
 public class Intake {
     private static PWM rollerLeft, rollerRight;
-    private static DoubleSolenoid gate;
 
-    public Intake() {
+    static {
         rollerLeft = new PWM(5);
-        rollerLeft = new PWM(6);
-        gate = new DoubleSolenoid(16, 3, 5);
-    }
-
-    public static void openGate() {
-        gate.set(DoubleSolenoid.Value.kForward);
-    }
-
-    public static void closeGate() {
-        gate.set(DoubleSolenoid.Value.kReverse);
+        rollerRight = new PWM(6);
     }
 
     public static void runIntake() {
@@ -26,8 +15,12 @@ public class Intake {
         rollerRight.setSpeed(1);
     }
 
+    public static void runOuttake(){
+        rollerLeft.setSpeed(-1);
+        rollerRight.setSpeed(-1);
+    }
     public static void stopIntake() {
-        rollerLeft.stopMotor();
-        rollerRight.stopMotor();
+        rollerLeft.setSpeed(0);
+        rollerRight.setSpeed(0);
     }
 }

@@ -1,35 +1,35 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.PWM;
+import edu.wpi.first.wpilibj.Relay;
 
 public class Crab {
     private static DoubleSolenoid crabC;
-    private static PWM crabWalk;
+    private static Relay crabWalk;
 
     static {
         crabC = new DoubleSolenoid(15, 5, 2);
-        crabWalk = new PWM(7);
-        crabWalk.setSpeed(0);
+        crabWalk = new Relay(0);
+
     }
 
-    public static void crabOn() {
+    public static void extend() {
         crabC.set(DoubleSolenoid.Value.kForward);
     }
 
-    public static void crabOff() {
+    public static void retract() {
         crabC.set(DoubleSolenoid.Value.kReverse);
     }
 
-    public static void left() {
-        crabWalk.setSpeed(-1);
+    public static void driveLeft() {
+        crabWalk.set(Relay.Value.kReverse);
     }
 
-    public static void right() {
-        crabWalk.setSpeed(1);
+    public static void driveRight() {
+        crabWalk.set(Relay.Value.kForward);
     }
 
-    public static void stop() {
-        crabWalk.setSpeed(0);
+    public static void driveStop() {
+        crabWalk.set(Relay.Value.kOff);
     }
 }
