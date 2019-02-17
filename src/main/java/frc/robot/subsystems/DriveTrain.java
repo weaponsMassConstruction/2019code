@@ -8,9 +8,9 @@ public class DriveTrain {
     public DriveTrain() {
         // Drivetrain
         leftBack = new PWM(3);
-        leftFront = new PWM(2);
+        leftFront = new PWM(1);
         rightBack = new PWM(4);
-        rightFront = new PWM(1);
+        rightFront = new PWM(2);
     }
 
     /**
@@ -20,10 +20,10 @@ public class DriveTrain {
      * @param rightTurn: right axis value
      * @param leftTurn: left axis value
      */
-    public static void drive(double speed, double rightTurn, double leftTurn) {
-        rightBack.setSpeed(speed + rightTurn + leftTurn);
-        rightFront.setSpeed(-speed + rightTurn + leftTurn);
-        leftBack.setSpeed(speed + leftTurn + rightTurn);
-        leftFront.setSpeed(-speed + leftTurn + rightTurn);
+    public static void drive(double speed, double turn) {
+        rightBack.setSpeed(speed - turn);
+        rightFront.setSpeed(speed - turn);
+        leftBack.setSpeed(speed + turn);
+        leftFront.setSpeed(speed + turn);
     }
 }

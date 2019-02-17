@@ -28,10 +28,12 @@ public class Robot extends TimedRobot {
   Arm arm;
   Climber climber;
   Crab crab;
-  Intake intake;
+  HatchIntake hatchIntake;
 
   DriverControls driverJoy;
   OperatorControls operatorJoy;
+  PTester ptester;
+
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -44,16 +46,19 @@ public class Robot extends TimedRobot {
     drive = new DriveTrain();
 
     // Subsystems
-    Compressor c = new Compressor();
+    Compressor c = new Compressor(15);
     c.setClosedLoopControl(true);
-    arm = new Arm();
-    climber = new Climber();
-    crab = new Crab();
-    intake = new Intake();
-
+    
+    //arm = new Arm();
+    //climber = new Climber();
+    //crab = new Crab();
+    hatchIntake = new HatchIntake();
+    
     // Controls
     driverJoy = new DriverControls();
     operatorJoy = new OperatorControls();
+    ptester = new PTester();
+    
   }
 
   /**
@@ -98,7 +103,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     DriverControls.driverControls();
-    OperatorControls.operatorControls();
+    //OperatorControls.operatorControls();
   }
 
   /**

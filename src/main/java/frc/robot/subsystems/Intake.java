@@ -1,31 +1,33 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.Servo;
+import edu.wpi.first.wpilibj.PWM;
 
 public class Intake {
-    private static DoubleSolenoid intake;
-    private static Servo servo;
+    private static PWM rollerLeft, rollerRight;
+    private static DoubleSolenoid gate;
 
     public Intake() {
-        intake = new DoubleSolenoid(5, 6);
-        servo = new Servo(0);
+        rollerLeft = new PWM(5);
+        rollerLeft = new PWM(6);
+        gate = new DoubleSolenoid(16, 3, 5);
     }
 
-    public static void extend() {
-        intake.set(Value.kForward);
+    public static void openGate() {
+        gate.set(DoubleSolenoid.Value.kForward);
     }
 
-    public static void retract() {
-        intake.set(Value.kReverse);
+    public static void closeGate() {
+        gate.set(DoubleSolenoid.Value.kReverse);
     }
 
-    public static void openServo() {
-        servo.set(1);
+    public static void runIntake() {
+        rollerLeft.setSpeed(1);
+        rollerRight.setSpeed(1);
     }
 
-    public static void closeServo() {
-        servo.set(0);
+    public static void stopIntake() {
+        rollerLeft.stopMotor();
+        rollerRight.stopMotor();
     }
 }

@@ -11,6 +11,7 @@ public class Arm {
         // Arm
         arm = new TalonSRX(1);
         arm.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute);
+        arm.setSelectedSensorPosition(0);
         arm.config_kP(0, .08, 0);
         arm.enableVoltageCompensation(true);
     }

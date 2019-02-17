@@ -5,9 +5,9 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 public class Climber {
     private static DoubleSolenoid frontClimb, backClimb;
 
-    public Climber() {
-        frontClimb = new DoubleSolenoid(0, 1);
-        backClimb = new DoubleSolenoid(4, 5);
+     static  {
+        frontClimb = new DoubleSolenoid(15,6, 3);
+        backClimb = new DoubleSolenoid(15,4, 1);
     }
 
     public static void frontOn() {
