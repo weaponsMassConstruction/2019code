@@ -13,6 +13,7 @@ public class OperatorControls {
     }
 
     public static void operatorControls() {
+        Arm.print();
         // Manual arm movement
         if (!HatchIntake.isExtended()) {
             if (Math.abs(operatorJoy.getY(Hand.kRight)) > .2) {
@@ -33,8 +34,12 @@ public class OperatorControls {
                 } else if (operatorJoy.getYButton()) {
                     Arm.setPosition(Constants.BALL_ONE);
                 } else if (operatorJoy.getTriggerAxis(Hand.kRight) > .05) {
+                    Grabber.outExtend();
+                    Grabber.inExtend();
                     Arm.setPosition(Constants.HATCH_THREE);
                 } else if (operatorJoy.getTriggerAxis(Hand.kLeft) > .05) {
+                    Grabber.outExtend();
+                    Grabber.inExtend();
                     Arm.setPosition(Constants.BALL_THREE);
                 } else if (operatorJoy.getBumper(Hand.kRight)) {
                     Arm.setPosition(Constants.GROUND);
@@ -44,7 +49,7 @@ public class OperatorControls {
             }
         }
 		// Grabber controls
-		if (operatorJoy.getButtonDRight()) {
+		if (operatorJoy.getButtonDRight()&& Arm.getSetPosition() != Constants.GROUND) {
 			Grabber.outExtend();
 		} else if (operatorJoy.getButtonDLeft() && !Grabber.isInExtended()) {
 			Grabber.outRetract();

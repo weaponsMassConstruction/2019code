@@ -43,10 +43,11 @@ public class DriverControls {
 
 		// Toggles for extending and retracting the hatch
 		if (driverJoy.getAButton()) {
+			System.out.println((Arm.getSetPosition() == Constants.HATCH_ONE) + "\n\n\n\n\n\n\n\n\n\n");
 			if (!aPrevious) {
 				aEnable = !aEnable;
 				if (aEnable) {
-					if (Arm.getSetPosition() <= Constants.HATCH_ONE)// && Arm.isWithinDeadband())
+					if (Arm.getSetPosition() == Constants.HATCH_ONE && Arm.isWithinDeadband())// && Arm.isWithinDeadband()) //TODO add this in
 						HatchIntake.extend();
 				} else
 					HatchIntake.retract();
