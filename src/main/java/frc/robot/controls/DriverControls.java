@@ -86,9 +86,9 @@ public class DriverControls {
 		}
 
 		// Intake controls
-		if (driverJoy.getTriggerAxis(Hand.kLeft) > .1) {
+		if (driverJoy.getTriggerAxis(Hand.kRight) > .1) {
 			Intake.runIntake();
-		} else if (driverJoy.getTriggerAxis(Hand.kRight) > .1) {
+		} else if (driverJoy.getTriggerAxis(Hand.kLeft) > .1) {
 			Intake.runOuttake();
 		} else {
 			Intake.stopIntake();
